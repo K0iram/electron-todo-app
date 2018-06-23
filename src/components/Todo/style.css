@@ -1,0 +1,35 @@
+.card {
+  max-width: 275px;
+}
+
+.bullet {
+  display: 'inline-block';
+  margin: '0 2px';
+  transform: 'scale(0.8)';
+}
+
+.title {
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.pos {
+  margin-bottom: 12px;
+}
+
+.todo-inputs {
+  display: flex;
+  justify-content: space-around;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 25px;
+  border: 1px solid black;
+}
+
+.todo-container {
+  margin-top: 50px;
+  display:  flex;
+  flex-wrap:  wrap;
+  justify-content:  space-around
+}
