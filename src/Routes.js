@@ -4,7 +4,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
-import Todo from './components/Todo'
+import Reminders from './components/Reminders'
 import AppLayout from './layout/main'
 
 
@@ -12,7 +12,7 @@ const Routes = () => (
   <Router>
     <AppLayout>
       <Switch>
-        <Route path="/" exact component={Todo} />
+        <Route path="/" exact component={Reminders} />
       </Switch>
     </AppLayout>
   </Router>

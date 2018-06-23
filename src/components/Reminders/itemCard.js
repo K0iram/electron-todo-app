@@ -9,8 +9,8 @@ import Typography from '@material-ui/core/Typography';
 
 import './style.css'
 
-const TodoCard = (props) => {
-  const { title, date, body, removeItem, disabled } = props
+const ItemCard = (props) => {
+  const { title, date, body, removeItem } = props
 
   return (
     <div>
@@ -36,11 +36,11 @@ const TodoCard = (props) => {
   )
 }
 
-  TodoCard.propTypes = {
+  ItemCard.propTypes = {
     title: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     body: PropTypes.string
   }
 
 
-export default TodoCard;
+export default ItemCard;
