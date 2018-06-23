@@ -25,18 +25,17 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  max-width: 500px;
+  max-width: 1160px;
   width: 100%;
   margin: 0 auto;
   padding: 25px;
-  border: 1px solid black;
 }
 
 .item-container {
   margin-top: 50px;
   display:  flex;
   flex-wrap:  wrap;
-  justify-content:  space-around
+  justify-content:  space-around;
 }
 
 .add-btn {
