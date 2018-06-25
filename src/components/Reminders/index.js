@@ -10,17 +10,27 @@ import './style.css'
 class ItemContainer extends Component {
   state = {
     body: "",
-    reminders: []
+    reminders: [],
+    removed: [],
+    duration: null
   }
 
   addItem = () => {
     let newElement =  {
       date: moment().format('LLLL'),
-      body: this.state.body
+      body: this.state.body,
+      duration: this.state.duration
     }
     this.setState(prevState => ({
       reminders: [...prevState.reminders, newElement],
-      body: ''
+      body: '',
+      duration: null
+    }))
+  }
+
+  undoQueue = (obj)  => {
+    this.setState(prevState => ({
+      removed: [...prevState.removed, obj]
     }))
   }
 
@@ -34,6 +44,21 @@ class ItemContainer extends Component {
     this.setState({ body: e.target.value})
   }
 
+  notify = (message, item, index) => {
+    new Promise((resolve, reject) => {
+      resolve(new Notification(message))
+    })
+    .then(() => {
+      this.undoQueue(item)
+      this.removeItem(index)
+    })
+  }
+
+  onDurationChange = (e) => {
+    this.setState({duration: e.target.value})
+    console.log(`target: ${e.target.value}`, `state: ${this.state.duration}`)
+  }
+
   render() {
     return (
       <div>
@@ -41,7 +66,9 @@ class ItemContainer extends Component {
           body={this.state.body}
           bodyChange={this.onBodyChange}
           addItem={this.addItem}
-          disabled={this.state.body === "" ? true : false}
+          disabled={this.state.body === ""}
+          duration={this.state.duration}
+          changer={this.onDurationChange}
         />
         <div className="item-container">
         {
@@ -50,7 +77,8 @@ class ItemContainer extends Component {
               date={item.date}
               body={item.body}
               key={i}
-              removeItem={() => this.removeItem(i)}
+              removeItem={() => this.undoQueue(item)}
+              notify={() => this.notify(item.body, item, i)}
             />
           )
         }

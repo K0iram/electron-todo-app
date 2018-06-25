@@ -1,0 +1,12 @@
+.lower-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.durations {
+  display: flex;
+}
+
+.durations p {
+  margin: 20px;
+}

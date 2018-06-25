@@ -6,11 +6,12 @@ import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Typography from '@material-ui/core/Typography'
+import ReactCountdownClock from 'react-countdown-clock'
 
 import './style.css'
 
 const ItemCard = (props) => {
-  const { date, body, removeItem } = props
+  const { date, body, removeItem, notify } = props
 
   return (
     <div>
@@ -27,6 +28,13 @@ const ItemCard = (props) => {
           <Button variant="fab" color="secondary" aria-label="delete" onClick={removeItem}>
             <DeleteIcon />
           </Button>
+          <ReactCountdownClock
+            seconds={5}
+            color="#000"
+            alpha={0.9}
+            size={50}
+            onComplete={(notify)}
+          />
         </CardActions>
       </Card>
     </div>
