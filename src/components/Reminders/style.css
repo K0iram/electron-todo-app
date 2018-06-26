@@ -41,3 +41,22 @@
 .add-btn {
   text-align: center;
 }
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  display: flex;
+  max-width: 200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  margin: 0;
+}
+
+.card-actions__clock {
+  margin-right: 15px;
+}
+
+.card {
+  margin-top: 20px;
+}

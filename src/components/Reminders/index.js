@@ -56,28 +56,26 @@ class ItemContainer extends Component {
 
   onDurationChange = (e) => {
     this.setState({duration: e.target.value})
-    console.log(`target: ${e.target.value}`, `state: ${this.state.duration}`)
   }
 
   render() {
+    const { body, duration } = this.state
     return (
       <div>
         <ReminderForm
-          body={this.state.body}
+          reminder={this.state}
+          disabled={!body || !duration}
           bodyChange={this.onBodyChange}
           addItem={this.addItem}
-          disabled={this.state.body === ""}
-          duration={this.state.duration}
           changer={this.onDurationChange}
         />
         <div className="item-container">
         {
           this.state.reminders.map((item, i) =>
             <ItemCard
-              date={item.date}
-              body={item.body}
+              reminder={item}
               key={i}
-              removeItem={() => this.undoQueue(item)}
+              removeItem={() => this.removeItem(i)}
               notify={() => this.notify(item.body, item, i)}
             />
           )

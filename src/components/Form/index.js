@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import TextField from '@material-ui/core/TextField'
 import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -36,6 +37,9 @@ class ReminderForm extends Component {
   ]
 
   render() {
+    const { reminder, bodyChange, changer, addItem, disabled } = this.props
+    const { body, duration } = reminder
+
     return (
       <Paper className='root' elevation={4}>
         <div className="item-inputs">
@@ -45,8 +49,8 @@ class ReminderForm extends Component {
             multiline
             rowsMax="5"
             margin="normal"
-            value={this.props.body}
-            onChange={this.props.bodyChange}
+            value={body}
+            onChange={bodyChange}
           />
           <div className="lower-container">
             <div className="durations">
@@ -58,8 +62,8 @@ class ReminderForm extends Component {
                       control={
                         <Checkbox
                           value={time.duration}
-                          onChange={this.props.changer}
-                          checked={this.props.duration === this.props.value}
+                          onChange={changer}
+                          checked={duration === time.duration}
                         />
                       }
                       label={time.label}
@@ -76,8 +80,8 @@ class ReminderForm extends Component {
                 color="primary"
                 aria-label="add"
                 className="button"
-                onClick={this.props.addItem}
-                disabled={this.props.disabled}
+                onClick={addItem}
+                disabled={disabled}
               >
                 <AddIcon />
               </Button>
@@ -88,5 +92,25 @@ class ReminderForm extends Component {
     )
   }
 }
+  ReminderForm.defaultProps = {
+    reminder: {
+      body: '',
+      duration: ''
+    },
+    addItem: () => {},
+    changer: () => {},
+    disabled: true
+  }
+
+  ReminderForm.propTypes = {
+    reminder: PropTypes.shape({
+      date: PropTypes.string,
+      body: PropTypes.string,
+      duration: PropTypes.string
+    }).isRequired,
+    addItem: PropTypes.func,
+    changer: PropTypes.func,
+    disabled: PropTypes.bool
+  }
 
 export default ReminderForm

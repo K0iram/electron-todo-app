@@ -11,7 +11,8 @@ import ReactCountdownClock from 'react-countdown-clock'
 import './style.css'
 
 const ItemCard = (props) => {
-  const { date, body, removeItem, notify } = props
+  const { reminder, removeItem, notify } = props
+  const { date, body, duration } = reminder
 
   return (
     <div>
@@ -25,25 +26,46 @@ const ItemCard = (props) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button variant="fab" color="secondary" aria-label="delete" onClick={removeItem}>
-            <DeleteIcon />
-          </Button>
-          <ReactCountdownClock
-            seconds={5}
-            color="#000"
-            alpha={0.9}
-            size={50}
-            onComplete={(notify)}
-          />
+          <div className="card-actions">
+            <div className="card-actions__btn">
+              <Button variant="fab" color="secondary" aria-label="delete" onClick={removeItem}>
+                <DeleteIcon />
+              </Button>
+            </div>
+            <div className="card-actions__clock">
+              <ReactCountdownClock
+                seconds={duration}
+                color="#000"
+                alpha={0.9}
+                size={60}
+                onComplete={(notify)}
+              />
+            </div>
+          </div>
         </CardActions>
       </Card>
     </div>
   )
 }
 
+  ItemCard.defaultProps = {
+    reminder: {
+      date: '',
+      body: '',
+      duration: ''
+    },
+    removeItem: () => {},
+    notify: () => {}
+  }
+
   ItemCard.propTypes = {
-    date: PropTypes.string.isRequired,
-    body: PropTypes.string
+    reminder: PropTypes.shape({
+      date: PropTypes.string,
+      body: PropTypes.string,
+      duration: PropTypes.string
+    }).isRequired,
+    removeItem: PropTypes.func,
+    notify: PropTypes.func
   }
 
 
