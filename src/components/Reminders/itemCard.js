@@ -6,13 +6,13 @@ import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Typography from '@material-ui/core/Typography'
-import ReactCountdownClock from 'react-countdown-clock'
-
+import Timer from '../Timer'
 import './style.css'
 
 const ItemCard = (props) => {
   const { reminder, removeItem, notify } = props
   const { date, body, duration } = reminder
+  let seconds = Number(duration)
 
   return (
     <div>
@@ -33,11 +33,8 @@ const ItemCard = (props) => {
               </Button>
             </div>
             <div className="card-actions__clock">
-              <ReactCountdownClock
-                seconds={duration}
-                color="#000"
-                alpha={0.9}
-                size={60}
+              <Timer
+                seconds={seconds}
                 onComplete={(notify)}
               />
             </div>
@@ -48,21 +45,11 @@ const ItemCard = (props) => {
   )
 }
 
-  ItemCard.defaultProps = {
-    reminder: {
-      date: '',
-      body: '',
-      duration: ''
-    },
-    removeItem: () => {},
-    notify: () => {}
-  }
-
   ItemCard.propTypes = {
     reminder: PropTypes.shape({
       date: PropTypes.string,
       body: PropTypes.string,
-      duration: PropTypes.string
+      duration: PropTypes.number
     }).isRequired,
     removeItem: PropTypes.func,
     notify: PropTypes.func

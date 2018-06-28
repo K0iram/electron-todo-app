@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 
+//Components
 import ItemCard from './itemCard'
 import ReminderForm from '../Form'
 
+//Styles
 import './style.css'
 
 
-class ItemContainer extends Component {
+class ReminderContainer extends Component {
   state = {
     body: "",
     reminders: [],
@@ -44,9 +46,13 @@ class ItemContainer extends Component {
     this.setState({ body: e.target.value})
   }
 
+  sendNotification = (mes) => {
+    new Notification(`You've got a reminder!`, {body: mes});
+  }
+
   notify = (message, item, index) => {
     new Promise((resolve, reject) => {
-      resolve(new Notification(message))
+      resolve(this.sendNotification(message))
     })
     .then(() => {
       this.undoQueue(item)
@@ -81,10 +87,9 @@ class ItemContainer extends Component {
           )
         }
         </div>
-
       </div>
     )
   }
 }
 
-export default ItemContainer
+export default ReminderContainer
