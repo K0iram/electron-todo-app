@@ -10,7 +10,7 @@ import Timer from '../Timer'
 import './style.css'
 
 const ItemCard = (props) => {
-  const { reminder, removeItem, notify } = props
+  const { reminder, removeItem, notify, key } = props
   const { date, body, duration } = reminder
   let seconds = Number(duration)
 
@@ -36,6 +36,7 @@ const ItemCard = (props) => {
               <Timer
                 seconds={seconds}
                 onComplete={(notify)}
+                key={key}
               />
             </div>
           </div>

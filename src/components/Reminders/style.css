@@ -46,16 +46,19 @@
   display: flex;
   justify-content: space-between;
   display: flex;
-  max-width: 200px;
   width: 100%;
   margin: 0 auto;
   padding: 0;
   margin: 0;
+  align-items: center;
 }
 
-.card-actions__clock {
-  margin-right: 15px;
-}
+/*.card-actions__clock {
+  padding: 5px;
+  width: 60px;
+  height: 60px;
+  position: relative;
+}*/
 
 .card {
   margin-top: 20px;
